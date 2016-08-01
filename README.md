@@ -55,9 +55,13 @@ if you're code breaks in `other stuff` then load the checkpoint and you can begi
 * `checkpoint.save({'df': df})`
 * `locals.update(checkpoint.load())`
 
-### Important
+### !Important!
+<div class="warning">
+<li> To avoid any unexpected results <code>checkpoint.load()</code> should be placed EXACTLY where you placed <code>checkpoint.save()</code>
+<li> No variables with <code>__</code> in the variable name will be stored. Keep that in mind when using.
 
-* No variables with `__` in the variable name will be stored. Keep that in mind when using.
+</div>
+ 
 
 ### Noteworthy
 
