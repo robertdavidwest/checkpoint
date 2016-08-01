@@ -49,6 +49,12 @@ def load(load_dir=None):
     load_dir : str
         directory to store shelve. If not specified then the default will be 
         used
+
+    Returns
+    -------
+    dict
+        key, value listing of loaded variables. This can be passed into locals apon load as follows:
+        locals().update(checkpoint.load())
     """
     if not load_dir:                
         load_dir = default_dir
