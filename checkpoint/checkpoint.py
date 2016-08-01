@@ -3,7 +3,9 @@ import shelve
 import time
 import dateutil.parser
 
-default_dir = lambda user: "Q:/scraps/{}/checkpoints".format(user)
+# use default user directory 
+user = getpass.getuser()
+default_dir = "Q:/scraps/{}/checkpoints".format(user)
 
 def save(save_dir=None):
     """
@@ -13,10 +15,8 @@ def save(save_dir=None):
         directory to store shelve. If not specified then the default will be 
         used
     """
-    if not save_dir:
-        # use default user directory 
-        user = getpass.getuser()
-        save_dir = default_dir(user)
+    if not save_dir:            
+        save_dir = default_dir
         
     timestamp = time.asctime()
     filename = 'checkpoint_{}.sh'.format(timestamp)
@@ -42,11 +42,8 @@ def load(load_dir=None):
         directory to store shelve. If not specified then the default will be 
         used
     """
-
-    if not load_dir:
-        # use default user directory 
-        user = getpass.getuser()
-        load_dir = default_dir(user)
+    if not load_dir:                
+        load_dir = default_dir
 
     # get all shelf names
     shelfnames = [d for d in os.listdir(load_dir) if d[:11] == "checkpoint_"]
