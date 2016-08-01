@@ -3,7 +3,7 @@ Easily and quickly shelve variables at some point in your code - a checkpoint! :
 
 Very similar to using a breakpoint in your code. For when you don't actually want to stop the code running and want to save the results after a crucial point
 
-### Use Example
+### Use Example - Shelving all local variables
 
 If you're code looks like this:
 
@@ -15,29 +15,41 @@ If you're code looks like this:
 	save results here
 
 and you're worried something might break in `other stuff`. Add a checkpoint as follows:
-
+	
+	import checkpoint
+	
 	some code here
 	more here
 	this takes ages to run...
-	import checkpoint; checkpoint.save()
+	checkpoint.save(locals())
 	
 	other stuff
 	save results here
 
 if you're code breaks in `other stuff` then load the checkpoint and you can begin debugging without having to run the slow section again:
 
+	import checkpoint
+	
 	'''
 	some code here
 	more here
 	this takes ages to run...
-	'''
-	import checkpoint; checkpoint.load()
+	'''	 
+	locals.update(checkpoint.load())
 	
 	other stuff
 	save results here
 
 * `checkpoint.load()` will pick up the results of your most recent `checkpoint.save()`
 
+### To shelve a specific variable instead or set of variables just pass a dict:
+
+* `checkpoint.save({'df': df})`
+* `locals.update(checkpoint.load())`
+
+### Important
+
+* No variables with `__` in the variable name will be stored. Keep that in mind when using.
 
 ### Noteworthy
 
