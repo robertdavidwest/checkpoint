@@ -3,6 +3,14 @@ Easily and quickly shelve variables at some point in your code - a checkpoint! :
 
 Very similar to using a breakpoint in your code. For when you don't actually want to stop the code running and want to save the results after a crucial point
 
+* Saving all local variables: 
+
+		checkpoint.save(locals())
+		
+* Loading the most recently saved set of variables and adding back into the local namespace:
+
+		locals().update(checkpoint.load())
+	
 ### Use Example - Shelving all local variables
 
 If you're code looks like this:
@@ -35,7 +43,7 @@ if you're code breaks in `other stuff` then load the checkpoint and you can begi
 	more here
 	this takes ages to run...
 	'''	 
-	locals.update(checkpoint.load())
+	locals().update(checkpoint.load())
 	
 	other stuff
 	save results here
